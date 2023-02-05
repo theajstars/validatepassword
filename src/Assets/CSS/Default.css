@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap");
+:root {
+  --white-primary: #fff;
+  --black-primary: rgb(25, 25, 25);
+  --black-secondary: #252525;
+  --blue-primary: #042e60;
+  --warning: #905816;
+  --success: #36a16e;
+  --success-secondary: rgb(50, 190, 116);
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  overflow: clip;
+  font-family: "Jost", sans-serif;
+}
+.page-container {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--white-primary);
+  align-items: center;
+  justify-content: center;
+}
+.mobile-container {
+  height: 750px;
+  width: 400px;
+  background-color: var(--black-primary);
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.mobile-device {
+  background-color: var(--white-primary);
+  width: 100%;
+  border-radius: inherit;
+  padding: 15px;
+  padding-top: 0px;
+  height: 100%;
+  box-sizing: border-box;
+}
+.mobile-device-header {
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+}
+.camera-container {
+  width: 20px;
+  height: 20px;
+  background-color: var(--black-primary);
+  border-radius: 50%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.camera-content {
+  background-color: var(--black-secondary);
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.mobile-device-content {
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 150px;
+  height: 400px;
+}
+.form-header {
+  align-items: center;
+  color: var(--blue-primary);
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 17px;
+}
+
+.form-input-container {
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--blue-primary);
+  outline: none;
+  height: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding-right: 10px;
+}
+.form-input {
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: var(--blue-primary);
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+}
+.toggle-password-visibility {
+  cursor: pointer;
+}
+.password-progress-bar {
+  height: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+.password-warning-text {
+  color: var(--warning);
+}
+.password-success-text {
+  color: var(--success);
+}
+.form-button {
+  background-color: var(--success);
+  border: none;
+  color: var(--white-primary);
+  outline: none;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 6px;
+  font-family: "Jost", sans-serif;
+  font-size: 17px;
+  transition-duration: 0.12s;
+}
+.form-button:hover {
+  background-color: var(--success-secondary);
+}
+.form-button[disabled] {
+  background-color: var(--success-secondary);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 450px) {
+  body {
+    overflow: auto;
+  }
+  div.mobile-container {
+    width: 100% !important;
+  }
+}
