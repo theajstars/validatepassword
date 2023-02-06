@@ -134,8 +134,69 @@ export default function App() {
     }
   }, [passwordStrength]);
 
+  const [completed, setCompleted] = useState<boolean>(false);
+  const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
+  const [redirectCount, setRedirectCount] = useState<number>(5);
+  const [redirectAnimationWidth, setRedirectAnimationWidth] =
+    useState<number>(100);
+
+  useEffect(() => {
+    if (isRedirecting) {
+      const RedirectOne = setInterval(() => {
+        setRedirectAnimationWidth((prevCount) => prevCount - 0.5);
+      }, 25);
+      const RedirectTwo = setInterval(() => {
+        setRedirectCount((prevCount) => prevCount - 1);
+      }, 1000);
+      //Set the intervals above to variables and clear then if isRedirecting is false
+      return () => {
+        clearInterval(RedirectOne);
+        clearInterval(RedirectTwo);
+      };
+    } else {
+      setRedirectAnimationWidth(100);
+      setRedirectCount(5);
+    }
+  }, [isRedirecting]);
+  useEffect(() => {
+    if (redirectCount === 0) {
+      window.location.href = "https://theajstars.com";
+    }
+  }, [redirectCount]);
+
   return (
     <div className="page-container flex-row">
+      <motion.div
+        initial={false}
+        animate={{
+          right: completed ? "10px" : "-500px",
+        }}
+        className="alert-container flex-column"
+      >
+        <div className="alert-header flex-row">
+          <span className="alert-icon">
+            <i className="far fa-check"></i>
+          </span>
+          Thank You!
+        </div>
+        <motion.div
+          initial={false}
+          animate={{ width: redirectAnimationWidth + "%" }}
+          className="alert-progress"
+        ></motion.div>
+        <span className="alert-text">Redirecting in {redirectCount}s</span>
+        <span
+          className="cancel-redirect flex-row"
+          onClick={() => {
+            setIsRedirecting(false);
+            setCompleted(false);
+            setPasswordOne("");
+            setPasswordTwo("");
+          }}
+        >
+          <i className="far fa-times"></i>&nbsp; Cancel
+        </span>
+      </motion.div>
       <div className="mobile-container flex-row">
         <div className="mobile-device flex-column">
           <div className="mobile-device-header flex-row">
@@ -155,6 +216,7 @@ export default function App() {
                 type={IsPasswordVisible ? "text" : "password"}
                 placeholder="Password"
                 className="form-input"
+                value={passwordOne}
                 onChange={(e) => {
                   setPasswordOne(e.target.value);
                 }}
@@ -180,6 +242,7 @@ export default function App() {
                 onChange={(e) => {
                   setPasswordTwo(e.target.value);
                 }}
+                value={passwordTwo}
               />
               <span
                 className="toggle-password-visibility"
@@ -221,7 +284,8 @@ export default function App() {
               className="form-button"
               disabled={passwordFeedbackText.length > 0}
               onClick={() => {
-                window.open("https://theajstars.com");
+                setIsRedirecting(true);
+                setCompleted(true);
               }}
             >
               Continue
